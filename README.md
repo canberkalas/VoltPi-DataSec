@@ -7,7 +7,7 @@ Bu proje, İnsansız Hava Araçları (İHA) ve uydular arasında veri bütünlü
 - **Linux Server**: İletişimi başlatmak ve son veri alımı.
 - Arduino Uno (AVR mimarisi)**: CRC-32 kullanarak ilk veri şifreleme.
 - **Raspberry Pi 2 (ARM mimarisi)**: CRC-64 kullanarak daha fazla şifreleme ve veri doğrulama.
-- USB Kabloları**: Ubuntu dizüstü bilgisayarı Arduino Uno ve Raspberry Pi'ye bağlamak.
+- USB Kabloları**: Server USB Kabloları, Arduino Uno ve Raspberry Pi bağlantısı.
 - Jumper Kabloları**: Arduino Uno ve Raspberry Pi 2 arasındaki UART iletişimi.
 
 ## Yazılım Bileşenleri
