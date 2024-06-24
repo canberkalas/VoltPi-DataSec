@@ -1,4 +1,4 @@
-İHA ve Uydu İletişimi için Güvenli Veri İletim Protokolü
+#İHA ve Uydu İletişimi için Güvenli Veri İletim Protokolü
 Projeye Genel Bakış
 
 Bu proje, İnsansız Hava Araçları (İHA) ve uydular arasında veri bütünlüğünü ve gizliliğini sağlamak için sağlam ve güvenli bir iletişim protokolü geliştirmeyi ve başlangıç seviyesinde simüle etmeyi amaçlamaktadır. AES şifreleme ile birlikte CRC-32 ve CRC-64 gibi hata tespit algoritmalarından yararlanarak, veri iletimi için özel bir protokol oluşturuyoruz. Bu proje, iletişim sürecini simüle etmek ve güvenli hale getirmek için ARM ve AVR mikrodenetleyici platformları olan Arduino Uno ve Raspberry Pi 2'nin bir kombinasyonunu kullanır.
@@ -27,7 +27,7 @@ Hata Tespit Algoritmaları: CRC-32 ve CRC-64 algoritmaları, veri iletimi sıras
 
 Simülasyon ve Test: Protokolün verimli çalıştığını ve veri bütünlüğünü sağladığını doğrulamak için çeşitli senaryolarda veri iletimi simülasyonları gerçekleştiriyoruz. Şifreleme ve hata tespit mekanizmalarının güvenliğini ve dayanıklılığını test ediyoruz.
 
-Projenin İkinci Etabı
+#Projenin İkinci Etabı
 SLE (Synchronous Link Encryption) Protokolü
 
 SLE protokolü, özellikle güvenli veri iletimi sağlamak için kullanılan bir şifreleme protokolüdür. SLE, veri paketlerinin şifrelenmiş ve zaman uyumlu bir şekilde iletilmesini sağlar, bu da verinin güvenliğini ve bütünlüğünü artırır. Projenin ikinci etabında SLE protokolünü kullanarak veri iletim güvenliğini bir adım daha ileri taşıyacağız.
@@ -37,11 +37,11 @@ Zaman Uyumu (Synchronous Timing): Verilerin belirli zaman aralıklarında iletil
 Güvenli Şifreleme: AES gibi güçlü şifreleme algoritmaları kullanarak verinin gizliliğini korur.
 Veri Bütünlüğü: Hata tespit mekanizmaları (örneğin, CRC) ile verinin bütünlüğünü sağlar.
 
-RISC-V Mimarisinde Assembly Kod Betikleri
+#RISC-V Mimarisinde Assembly Kod Betikleri
 
 RISC-V, açık kaynaklı ve modüler bir komut seti mimarisidir (ISA). Projenin ikinci etabında, RISC-V mimarisi üzerine inşa edilen mikroişlemciler kullanarak veri işleme ve iletişim protokollerini geliştireceğiz. Aşağıda, RISC-V assembly dilinde bazı temel komut örneklerini bulabilirsiniz.
 
-RISC-V Assembly Kod Örnekleri:
+#RISC-V Assembly Kod Örnekleri:
 1. Basit Bir Toplama İşlemi
 ***
 assembly
@@ -80,6 +80,6 @@ equal_label:
 end_label:
     nop            # Program sonu (no operation)
 ***
-Proje İçin Beklenen Kazanımlar
+#Proje İçin Beklenen Kazanımlar
 
 Bu ikinci etap, projemizin güvenlik ve performans açısından önemli bir adımını temsil etmektedir. SLE protokolü ve RISC-V mimarisinin kullanımı, sistemimizin güvenilirliğini ve etkinliğini artıracaktır. Bu etap, özellikle veri iletimi ve işleme sırasında karşılaşılan güvenlik zorluklarına çözümler sunmayı amaçlamaktadır.
