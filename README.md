@@ -1,7 +1,7 @@
 # İHA ve Uydu İletişimi için Güvenli Veri İletim Protokolü
 
 ## Projeye Genel Bakış
-Bu proje, İnsansız Hava Araçları (İHA) ve uydular arasında veri bütünlüğünü ve gizliliğini sağlamak için sağlam ve güvenli bir iletişim protokolü geliştirmeyi amaçlamaktadır. AES şifreleme ile birlikte CRC-32 ve CRC-64 dahil olmak üzere en son şifreleme tekniklerinden yararlanarak, veri iletimi için özel bir protokol oluşturuyoruz. Bu proje, iletişim sürecini simüle etmek ve güvenli hale getirmek için ARM ve AVR mikrodenetleyici platformlarının, özellikle Arduino Uno ve Raspberry Pi 2'nin bir kombinasyonunu kullanır.
+Bu proje, İnsansız Hava Araçları (İHA) ve uydular arasında veri bütünlüğünü ve gizliliğini sağlamak için sağlam ve güvenli bir iletişim protokolü geliştirmeyi,başlangıç seviyesinde simüle etmeyi amaçlamaktadır. AES şifreleme ile birlikte CRC-32 ve CRC-64 dahil olmak üzere bazı şifreleme tekniklerinden yararlanarak, veri iletimi için özel bir protokol oluşturuyoruz. Bu proje, iletişim sürecini simüle etmek ve güvenli hale getirmek için ARM ve AVR mikrodenetleyici platformları olan Arduino Uno ve Raspberry Pi 2'nin bir kombinasyonunu kullanır.
 
 ## Donanım Bileşenleri
 - **Ubuntu Dizüstü Bilgisayar**: İletişimi başlatmak ve son veri alımı için.
