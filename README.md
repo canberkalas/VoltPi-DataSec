@@ -1,7 +1,9 @@
 İHA ve Uydu İletişimi için Güvenli Veri İletim Protokolü
+
 Projeye Genel Bakış
 
 Bu proje, İnsansız Hava Araçları (İHA) ve uydular arasında veri bütünlüğünü ve gizliliğini sağlamak için güvenli bir iletişim protokolü geliştirmeyi ve başlangıç seviyesinde simüle etmeyi amaçlamaktadır. AES şifreleme ile birlikte CRC-32 ve CRC-64 gibi hata tespit algoritmalarından yararlanarak, veri iletimi için özel bir protokol oluşturuyoruz. Bu proje, iletişim sürecini simüle etmek ve güvenli hale getirmek için ARM ve AVR mikrodenetleyici platformları olan Arduino Uno ve Raspberry Pi 2'nin bir kombinasyonunu kullanır.
+
 Donanım Bileşenleri
 
     Linux Server: İletişimi başlatmak ve son veri alımı.
@@ -18,6 +20,7 @@ Yazılım Bileşenleri
     WiringPi: Raspberry Pi 2 üzerinde GPIO ve UART kullanımı.
 
 Projenin İkinci Etabı
+
 SLE (Synchronous Link Encryption) Protokolü
 
 SLE protokolü, güvenli veri iletimi sağlamak için kullanılan bir şifreleme protokolüdür. SLE, veri paketlerinin şifrelenmiş ve zaman uyumlu bir şekilde iletilmesini sağlar. İkinci etapta SLE protokolünü kullanarak veri iletim güvenliğini bir adım daha ileri taşıyacağız.
