@@ -1,3 +1,18 @@
+Kodu Anlama:
+
+    crc32: Verinin CRC-32 kontrol toplamını hesaplar. Bu fonksiyon, verinin bütünlüğünü sağlamak için kullanılır.
+    setup(): UART konfigürasyonunu yapar ve haberleşmeyi başlatır.
+    loop():
+        Örnek veriyi ve CRC-32 sonucunu UART üzerinden gönderir.
+        Veri gönderimi aşamaları:
+            Başlangıç baytı
+            Veri uzunluğu
+            Verinin kendisi
+            CRC kontrol toplamı
+            Bitiş baytı
+
+Bu kod, UART üzerinden veri iletimi yaparak verinin bütünlüğünü sağlamak için CRC-32 kontrol toplamını kullanır. Ayrıca, her 1 saniyede bir veri gönderir.
+
 İHA ve Uydu İletişimi için Güvenli Veri İletim Protokolü
 Projeye Genel Bakış
 
