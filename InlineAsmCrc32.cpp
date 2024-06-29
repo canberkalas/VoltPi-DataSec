@@ -1,7 +1,10 @@
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdint.h>
 
 #define UART_DATA_REG UDR0
+#define UART_BAUD_RATE 9600
+#define F_CPU 16000000UL
 
 uint32_t crc32(const uint8_t* data, size_t length) {
     uint32_t crc = 0xFFFFFFFF;
@@ -18,10 +21,22 @@ uint32_t crc32(const uint8_t* data, size_t length) {
 }
 
 void setup() {
-    UBRR0H = 0;
-    UBRR0L = 103; // 9600 baud rate için
+    // UART Baud Rate Ayarları
+    UBRR0H = (F_CPU / 16 / UART_BAUD_RATE - 1) >> 8;
+    UBRR0L = (F_CPU / 16 / UART_BAUD_RATE - 1);
     UCSR0B = (1 << TXEN0); // UART Transmitter'ı aktif etme
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); // UART frame formatı ayarları: 8 data bit, 1 stop bit
+}
+
+void sendByte(uint8_t byte) {
+    while (!(UCSR0A & (1 << UDRE0)));
+    UDR0 = byte;
+}
+
+void sendData(const uint8_t* data, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        sendByte(data[i]);
+    }
 }
 
 void loop() {
@@ -29,41 +44,19 @@ void loop() {
     uint32_t crc = crc32(data, sizeof(data));
 
     // Başlangıç baytını gönder
-    asm volatile (
-        "ldi r16, 0x01\n\t"
-        "out %0, r16\n\t"
-        : : "I" (_SFR_IO_ADDR(UART_DATA_REG)) : "r16"
-    );
+    sendByte(0x01);
 
     // Veri uzunluğunu gönder
-    asm volatile (
-        "ldi r16, 0x04\n\t" // 4 bayt veri (örnek)
-        "out %0, r16\n\t"
-        : : "I" (_SFR_IO_ADDR(UART_DATA_REG)) : "r16"
-    );
+    sendByte(sizeof(data));
 
     // Veriyi gönder
-    asm volatile (
-        "ldi r16, 0x12\n\t"
-        "ldi r17, 0x34\n\t"
-        "out %0, r16\n\t"
-        "out %1, r17\n\t"
-        : : "I" (_SFR_IO_ADDR(UART_DATA_REG)), "I" (_SFR_IO_ADDR(UART_DATA_REG)) : "r16", "r17"
-    );
+    sendData(data, sizeof(data));
 
     // CRC'yi gönder
-    asm volatile (
-        "mov r16, %0\n\t"
-        "out %1, r16\n\t"
-        : : "r" (crc), "I" (_SFR_IO_ADDR(UART_DATA_REG)) : "r16"
-    );
+    sendData((uint8_t*)&crc, sizeof(crc));
 
     // Bitiş baytını gönder
-    asm volatile (
-        "ldi r16, 0xFF\n\t"
-        "out %0, r16\n\t"
-        : : "I" (_SFR_IO_ADDR(UART_DATA_REG)) : "r16"
-    );
+    sendByte(0xFF);
 
     _delay_ms(1000); // 1 saniye bekle
 }
