@@ -13,7 +13,7 @@ fn check_ufw_status() {
         .arg("status")
         .output()
         .expect("Failed to execute UFW status check");
-    
+
     let status = String::from_utf8_lossy(&output.stdout);
     if !status.contains("Status: active") {
         panic!("UFW is not active. Please enable UFW for security.");
@@ -27,7 +27,7 @@ fn check_open_ports() {
         .arg("-i")
         .output()
         .expect("Failed to check open ports");
-    
+
     let ports = String::from_utf8_lossy(&output.stdout);
     println!("Open ports: \n{}", ports);
 }
@@ -43,7 +43,7 @@ fn main() {
     check_open_ports();
 
     // File operations
-    let mut file = File::open("/dev/ttyUS").expect("Cannot open serial port");
+    let mut file = File::open("/ttyUSB0").expect("Cannot open serial port");
     let mut buffer = [0; 256];
 
     loop {
@@ -56,9 +56,6 @@ fn main() {
 
             println!("Received data: {:?}, CRC-64: {:x}", &buffer[..n], crc);
             println!("Encrypted data: {:?}", encrypted_data);
-
-            // Simulate sending data back to a remote server (or process it as needed)
-            // For simplicity, we are just printing the data here
         }
     }
 }
