@@ -37,13 +37,37 @@ fn encrypt_data(key: &[u8; 16], iv: &[u8; 16], data: &[u8]) -> Vec<u8> {
     cipher.encrypt_vec(data)
 }
 
+fn decrypt_data(key: &[u8; 16], iv: &[u8; 16], ciphertext: &[u8]) -> Vec<u8> {
+    let cipher = Aes128Cbc::new_from_slices(key, iv).unwrap();
+    cipher.decrypt_vec(ciphertext).unwrap()
+}
+
+fn crc64_check(data: &[u8]) -> u64 {
+    crc64::checksum_ecma(data)
+}
+
+fn memory_check() {
+    unsafe {
+        asm!(
+            "
+            mov r0, #0x20000000
+            ldr r1, [r0]
+            cmp r1, #0
+            bne error
+            ",
+            options(nostack, nomem)
+        );
+    }
+}
+
 fn main() {
     // Security checks
     check_ufw_status();
     check_open_ports();
+    memory_check();
 
     // File operations
-    let mut file = File::open("/ttyUSB0").expect("Cannot open serial port");
+    let mut file = File::open("/dev/ttyUSB0").expect("Cannot open serial port");
     let mut buffer = [0; 256];
 
     loop {
@@ -56,6 +80,14 @@ fn main() {
 
             println!("Received data: {:?}, CRC-64: {:x}", &buffer[..n], crc);
             println!("Encrypted data: {:?}", encrypted_data);
+
+            // Simulate sending data back to Ubuntu
+            let mut file_out = File::create("/dev/serial1").expect("Cannot open serial port");
+            file_out.write_all(&encrypted_data).expect("Failed to write to serial port");
+
+            // Decrypting the data for demonstration
+            let decrypted_data = decrypt_data(&key, &iv, &encrypted_data);
+            println!("Decrypted data: {:?}", decrypted_data);
         }
     }
 }
