@@ -67,7 +67,7 @@ fn main() {
     memory_check();
 
     // File operations
-    let mut file = File::open("/dev/ttyUSB0").expect("Cannot open serial port");
+    let mut file = File::open("/ttyUSB0").expect("Cannot open serial port");
     let mut buffer = [0; 256];
 
     loop {
@@ -82,7 +82,7 @@ fn main() {
             println!("Encrypted data: {:?}", encrypted_data);
 
             // Simulate sending data back to Ubuntu
-            let mut file_out = File::create("/dev/serial1").expect("Cannot open serial port");
+            let mut file_out = File::create("/serial1").expect("Cannot open serial port");
             file_out.write_all(&encrypted_data).expect("Failed to write to serial port");
 
             // Decrypting the data for demonstration
