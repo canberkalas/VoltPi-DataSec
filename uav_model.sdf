@@ -1,0 +1,33 @@
+***Gazebo'da İHA ve Uydu Nesneleri Oluşturma:
+Gazebo'da simülasyon ortamında İHA ve uydu nesneleri oluşturacağız. 
+Bunun için Gazebo'nun SDF (Simulation Description Format) dosyalarını kullanacağız. 
+***
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="uav">
+    <link name="body">
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.1</ixx>
+          <iyy>0.1</iyy>
+          <izz>0.1</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>1 1 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>1 1 0.5</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
